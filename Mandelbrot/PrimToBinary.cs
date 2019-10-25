@@ -8,7 +8,7 @@ namespace Mandelbrot
         public PrimToBinary()
         {
             //this.Add(2);
-            int max = 513;
+            int max = 515;
             for (int i = 2; i <= max; i++)
             {
                 bool isPrimary = true;

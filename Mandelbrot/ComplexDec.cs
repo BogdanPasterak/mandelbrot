@@ -11,5 +11,15 @@ namespace Mandelbrot
             this.real = real;
             this.imag = imag;
         }
+
+        public ComplexDec Iteralizacja(ComplexDec c) {
+            return new ComplexDec(real * real - imag * imag + c.real, 2 * real * imag + c.imag);
+        }
+
+        public override string ToString()
+        {
+            return "[ r: " + real + ", i: " + imag + " ]";
+        }
+
     }
 }
