@@ -1,0 +1,6 @@
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/Mandelbrot.exe
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/Mandelbrot.pdb
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/x86/Debug/Mandelbrot.csprojAssemblyReference.cache
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/x86/Debug/Mandelbrot.csproj.CoreCompileInputs.cache
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/x86/Debug/Mandelbrot.exe
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/x86/Debug/Mandelbrot.pdb

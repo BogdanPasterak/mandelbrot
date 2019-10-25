@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{3B7FBFF0-D581-4ACC-B820-B1D13728FE56}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mandelbrot/ComplexDec.cs">
+    <Files>
+      <File FileName="Mandelbrot/Program.cs" Line="11" Column="35" />
+      <File FileName="Mandelbrot/ComplexDec.cs" Line="13" Column="10" />
+      <File FileName="Mandelbrot/PrimToBinary.cs" Line="11" Column="26" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="Mandelbrot" expanded="True">
+            <Node name="Mandelbrot" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="ComplexDec.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Mandelbrot PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
