@@ -1,4 +1,4 @@
-### Mandelbrot set
+# Mandelbrot set
 
-# Autor: Bogdan Pasterak
+### Autor: Bogdan Pasterak
 
