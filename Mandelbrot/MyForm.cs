@@ -11,22 +11,13 @@ namespace Mandelbrot
     {
         MyPanel panel;
         Size mySize = new Size(920, 680);
-        int counter = 0;
 
         public MyForm()
         {
             this.Text = "Mandelbrot";
             this.Size = mySize;
-            mySize = this.ClientSize;
-            mySize.Width -= 8;
-            mySize.Height -= 8;
-            panel = new MyPanel();
-            panel.BackColor = Color.Red;
-            panel.Size = mySize;
-            //panel.Anchor = AnchorStyles.None;
-            panel.Location = new Point(4, 4);
+            panel = new MyPanel(this.ClientSize);
 
-            //panel.SetColorPixel(Color.White, 1, 10);
             this.Controls.Add(panel);
 
         }
@@ -34,10 +25,6 @@ namespace Mandelbrot
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            Text = counter.ToString();
-            counter++;
-            counter %= 8;
-
         }
     }
 

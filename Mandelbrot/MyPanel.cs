@@ -6,11 +6,16 @@ namespace Mandelbrot
 {
     public class MyPanel : Panel
     {
-        /*
-        public MyPanel() : base()
+
+        public MyPanel(Size size) : base()
         {
+            size.Width -= 10;
+            size.Height -= 10;
+            Size = size;
+            Location = new Point(5, 5);
+
         }
-        */       
+
 
         protected override void OnPaint(PaintEventArgs e)
         {

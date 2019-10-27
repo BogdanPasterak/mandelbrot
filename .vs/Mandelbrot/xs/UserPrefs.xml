@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{3B7FBFF0-D581-4ACC-B820-B1D13728FE56}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Mandelbrot/MyPanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mandelbrot/MyForm.cs">
     <Files>
-      <File FileName="Mandelbrot/Program.cs" Line="15" Column="42" />
+      <File FileName="Mandelbrot/Program.cs" Line="11" Column="6" />
       <File FileName="Mandelbrot/ComplexDec.cs" Line="21" Column="58" />
       <File FileName="README.md" Line="3" Column="3" />
-      <File FileName="Mandelbrot/MyForm.cs" Line="21" Column="41" />
+      <File FileName="Mandelbrot/MyForm.cs" Line="31" Column="13" />
       <File FileName="Mandelbrot/PrimToBinary.cs" Line="1" Column="1" />
-      <File FileName="Mandelbrot/MyPanel.cs" Line="28" Column="21" />
+      <File FileName="Mandelbrot/MyPanel.cs" Line="12" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +16,7 @@
             <Node name="Mandelbrot" expanded="True">
               <Node name="References" expanded="True" />
               <Node name="Properties" expanded="True" />
-              <Node name="MyPanel.cs" selected="True" />
+              <Node name="MyForm.cs" selected="True" />
             </Node>
           </Node>
         </State>
