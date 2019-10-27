@@ -39,6 +39,36 @@
       <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive">
+      <HintPath>..\packages\System.Reactive.4.2.0\lib\net46\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Security.Principal.Windows">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.6.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.AccessControl">
+      <HintPath>..\packages\System.Security.AccessControl.4.6.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.6.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -46,6 +76,7 @@
     <Compile Include="ComplexDec.cs" />
     <Compile Include="PrimToBinary.cs" />
     <Compile Include="MyForm.cs" />
+    <Compile Include="MyPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

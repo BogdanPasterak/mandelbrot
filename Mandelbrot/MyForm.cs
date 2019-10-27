@@ -1,23 +1,31 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Windows;
+//using System.Windows;
 using System.Drawing;
 
 namespace Mandelbrot
 {
     public class MyForm : Form
     {
-        Panel panel;
+        MyPanel panel;
+        Size mySize = new Size(920, 680);
+
         public MyForm()
         {
             this.Text = "Mandelbrot";
-            this.Size = new Size(920, 680);
-            panel = new Panel();
+            this.Size = mySize;
+            mySize = this.ClientSize;
+            mySize.Width -= 8;
+            mySize.Height -= 8;
+            panel = new MyPanel();
             panel.BackColor = Color.Red;
-            panel.Size = new Size(900, 600);
+            panel.Size = mySize;
             //panel.Anchor = AnchorStyles.None;
-            panel.Location = new Point(this.ClientSize.Width / 2 - panel.Width / 2, this.ClientSize.Height / 2 - panel.Height / 2);
+            panel.Location = new Point(4, 4);
+
+            //panel.SetColorPixel(Color.White, 1, 10);
             this.Controls.Add(panel);
         }
     }
+
 }
