@@ -18,14 +18,11 @@ namespace Mandelbrot
             this.Size = mySize;
             panel = new MyPanel(this.ClientSize);
 
+
             this.Controls.Add(panel);
 
         }
 
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-        }
     }
 
 }

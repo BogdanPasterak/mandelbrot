@@ -21,16 +21,13 @@ namespace Mandelbrot
         {
             base.OnPaint(e);
             e.Graphics.DrawLine(Pens.Black, 0, 0, 100, 50);
-            //Bitmap bitmap = new Bitmap(this.Width, this.Height);
 
+        }
 
-            // not work, problem "gdi32.dll"
-            //Color color = Color.White;
-            //IntPtr hdc = e.Graphics.GetHdc();
-            //uint colorRef = (uint)((color.B << 16) | (color.G << 8) | (color.R));
-            //GDI.SetPixel(hdc, 1, 10, colorRef);
-            //e.Graphics.ReleaseHdc(hdc);
-
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+            BackColor = Color.Yellow;
         }
 
         protected override void OnClick(EventArgs e)
@@ -48,12 +45,5 @@ namespace Mandelbrot
 
     }
 
-    /*
-    public class GDI
-    {
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        internal static extern bool SetPixel(IntPtr hdc, int x, int y, uint crColor);
-    }
-    */
 
 }
