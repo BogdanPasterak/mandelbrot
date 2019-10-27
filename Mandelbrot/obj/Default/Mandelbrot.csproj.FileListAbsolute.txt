@@ -1,0 +1,6 @@
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Default/Mandelbrot.exe
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Default/System.Drawing.Common.dll
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Default/System.Drawing.Primitives.dll
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/Default/Mandelbrot.csproj.CoreCompileInputs.cache
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/Default/Mandelbrot.csproj.CopyComplete
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/obj/Default/Mandelbrot.exe
