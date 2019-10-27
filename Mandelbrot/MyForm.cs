@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 //using System.Windows;
 using System.Drawing;
+using System.Threading;
+
 
 namespace Mandelbrot
 {
@@ -9,6 +11,7 @@ namespace Mandelbrot
     {
         MyPanel panel;
         Size mySize = new Size(920, 680);
+        int counter = 0;
 
         public MyForm()
         {
@@ -25,6 +28,16 @@ namespace Mandelbrot
 
             //panel.SetColorPixel(Color.White, 1, 10);
             this.Controls.Add(panel);
+
+        }
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+            Text = counter.ToString();
+            counter++;
+            counter %= 8;
+
         }
     }
 

@@ -13,8 +13,9 @@ namespace Mandelbrot
         public static void Main(string[] args)
         {
             //Console.WriteLine("Start");
+            MyForm myForm = new MyForm();
 
-            Application.Run(new MyForm());
+            Application.Run(myForm);
             //PrimToBinary ptb = new PrimToBinary();
 
             //Process process = Process.GetCurrentProcess();
@@ -36,9 +37,9 @@ namespace Mandelbrot
             Console.WriteLine(z);
             z = z.Iteralizacja(c);
             Console.WriteLine(z);
+            */
             Console.WriteLine("End");
-            */           
- 
+
         }
     }
 }

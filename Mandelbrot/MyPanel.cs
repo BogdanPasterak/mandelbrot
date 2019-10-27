@@ -6,14 +6,18 @@ namespace Mandelbrot
 {
     public class MyPanel : Panel
     {
+        /*
         public MyPanel() : base()
         {
         }
+        */       
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             e.Graphics.DrawLine(Pens.Black, 0, 0, 100, 50);
+            //Bitmap bitmap = new Bitmap(this.Width, this.Height);
+
 
             // not work, problem "gdi32.dll"
             //Color color = Color.White;
@@ -22,6 +26,19 @@ namespace Mandelbrot
             //GDI.SetPixel(hdc, 1, 10, colorRef);
             //e.Graphics.ReleaseHdc(hdc);
 
+        }
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+            if (BackColor == Color.Red)
+            {
+                BackColor = Color.Blue;
+            }
+            else
+            {
+                BackColor = Color.Red;
+            }
         }
 
     }
