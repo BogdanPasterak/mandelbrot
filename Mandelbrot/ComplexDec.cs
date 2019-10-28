@@ -12,8 +12,34 @@ namespace Mandelbrot
             this.imag = imag;
         }
 
-        public ComplexDec Iteralizacja(ComplexDec c) {
+        public ComplexDec(ComplexDec model)
+        {
+            real = model.real;
+            imag = model.imag;
+        }
+
+        public ComplexDec iteralizacja(ComplexDec c) {
             return new ComplexDec(real * real - imag * imag + c.real, 2 * real * imag + c.imag);
+        }
+
+        public int level(ComplexDec c)
+        {
+            int level = 0;
+            decimal rSquare, iSquare;
+
+            while (level < 64)
+            {
+                rSquare = real * real;
+                iSquare = imag * imag;
+                if (rSquare + iSquare >= 4)
+                    return level;
+                imag = imag * real * 2 + c.imag;
+                real = rSquare - iSquare + c.real;
+                level++;
+            }
+
+
+            return level;
         }
 
         public override string ToString()

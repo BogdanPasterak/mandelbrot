@@ -1,20 +1,21 @@
 ﻿<Properties StartupConfiguration="{3B7FBFF0-D581-4ACC-B820-B1D13728FE56}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Mandelbrot/MyPanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument=".gitignore">
     <Files>
-      <File FileName="Mandelbrot/Program.cs" Line="11" Column="6" />
-      <File FileName="Mandelbrot/ComplexDec.cs" Line="15" Column="55" />
+      <File FileName="Mandelbrot/Program.cs" Line="25" Column="1" />
+      <File FileName="Mandelbrot/ComplexDec.cs" Line="38" Column="25" />
       <File FileName="Mandelbrot/MyForm.cs" Line="13" Column="39" />
-      <File FileName="Mandelbrot/MyPanel.cs" Line="44" Column="33" />
+      <File FileName="Mandelbrot/MyPanel.cs" Line="53" Column="51" />
+      <File FileName=".gitignore" Line="17" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Option id="ShowAllFiles" value="True" />
           <Node name="Mandelbrot" expanded="True">
+            <Node name=".gitignore" selected="True" />
             <Node name="Mandelbrot" expanded="True">
               <Node name="References" expanded="True" />
               <Node name="Properties" expanded="True" />
-              <Node name="MyPanel.cs" selected="True" />
             </Node>
           </Node>
         </State>

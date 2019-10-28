@@ -8,8 +8,8 @@ namespace Mandelbrot
     public class MyPanel : Panel
     {
         List<Bitmap> bitmaps;
-        ComplexDec start = new ComplexDec(-2.25m, 1m);
-        ComplexDec stop = new ComplexDec(.75m, -1m);
+        ComplexDec start = new ComplexDec(-2.25m, 1.25m);
+        ComplexDec stop = new ComplexDec(.75m, -1.25m);
         ComplexDec temp = new ComplexDec(0m, 1m);
 
         //Bitmap bitmap;
@@ -22,6 +22,8 @@ namespace Mandelbrot
             Size = size;
             Location = new Point(6 + wDiv / 2, 6 + hDiv / 2);
 
+            Console.WriteLine(size.ToString());
+
             bitmaps = new List<Bitmap>();
             for (int i = 0; i < size.Height / 3; i++)
             {
@@ -29,33 +31,40 @@ namespace Mandelbrot
             }
 
 
-            ComplexDec t = new ComplexDec(0, 0);
+            ComplexDec t;
+
             for (int y = 0; y < bitmaps.Count; y++)
             {
                 for (int i = 0; i < size.Width / 3; i++)
                 {
                     temp.real = start.real + (3m / (size.Width / 3)) * i;
-                    temp.imag = start.imag - (2m / (size.Height / 3)) * y;
-                    t.real = temp.real;
-                    t.imag = temp.imag;
-                    t = t.Iteralizacja(temp);
-                    t = t.Iteralizacja(temp);
-                    t = t.Iteralizacja(temp);
-                    t = t.Iteralizacja(temp);
-                    if (t.isOver())
-                   {
+                    temp.imag = start.imag - (2.5m / (size.Height / 3)) * y;
+                    t = new ComplexDec(temp);
+                    Color color = Color.Black;
+                    int it = t.level(temp);
+                    if (it == 1) color = Color.Aqua;
+                    if (it == 2) color = Color.Blue;
+                    if (it == 3) color = Color.Cyan;
+                    if (it == 4) color = Color.Fuchsia;
+                    if (it == 5) color = Color.Salmon;
+                    if (it == 6) color = Color.Tan;
+                    if (it == 7) color = Color.Yellow;
+                    if (it > 7) color = Color.Orchid;
+                    if (it > 63) color = Color.Red;
+
+                    {
                         //Console.WriteLine(t.ToString());
-                        bitmaps[y].SetPixel(i * 3, 0, Color.Black);
-                        bitmaps[y].SetPixel(i * 3, 1, Color.Black);
-                        bitmaps[y].SetPixel(i * 3, 2, Color.Black);
-                        bitmaps[y].SetPixel(i * 3 + 1, 0, Color.Black);
-                        bitmaps[y].SetPixel(i * 3 + 1, 1, Color.Black);
-                        bitmaps[y].SetPixel(i * 3 + 1, 2, Color.Black);
-                        bitmaps[y].SetPixel(i * 3 + 2, 0, Color.Black);
-                        bitmaps[y].SetPixel(i * 3 + 2, 1, Color.Black);
-                        bitmaps[y].SetPixel(i * 3 + 2, 2, Color.Black);
+                        bitmaps[y].SetPixel(i * 3, 0, color);
+                        bitmaps[y].SetPixel(i * 3, 1, color);
+                        bitmaps[y].SetPixel(i * 3, 2, color);
+                        bitmaps[y].SetPixel(i * 3 + 1, 0, color);
+                        bitmaps[y].SetPixel(i * 3 + 1, 1, color);
+                        bitmaps[y].SetPixel(i * 3 + 1, 2, color);
+                        bitmaps[y].SetPixel(i * 3 + 2, 0, color);
+                        bitmaps[y].SetPixel(i * 3 + 2, 1, color);
+                        bitmaps[y].SetPixel(i * 3 + 2, 2, color);
                     }
-                    //bitmaps[1].SetPixel(i, 1, Color.Black);
+                    //bitmaps[1].SetPixel(i, 1, color);
                 }
             }
 
