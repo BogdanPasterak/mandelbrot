@@ -39,7 +39,7 @@ namespace Mandelbrot
                     t.real = temp.real;
                     t.imag = temp.imag;
                     t = t.Iteralizacja(temp);
-                    t = t.Iteralizacja(temp);
+                    //t = t.Iteralizacja(temp);
                     //t = t.Iteralizacja(temp);
                    if (Math.Abs(t.real) < 2)
                    {
