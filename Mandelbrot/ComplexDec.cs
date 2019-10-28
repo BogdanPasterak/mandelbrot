@@ -21,5 +21,10 @@ namespace Mandelbrot
             return "[ r: " + real + ", i: " + imag + " ]";
         }
 
+        public bool isOver()
+        {
+            return real * real + imag * imag >= 4;
+        }
+
     }
 }

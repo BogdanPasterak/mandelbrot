@@ -35,13 +35,14 @@ namespace Mandelbrot
                 for (int i = 0; i < size.Width / 3; i++)
                 {
                     temp.real = start.real + (3m / (size.Width / 3)) * i;
-                    temp.imag = start.imag + (2m / (size.Height / 3)) * y;
+                    temp.imag = start.imag - (2m / (size.Height / 3)) * y;
                     t.real = temp.real;
                     t.imag = temp.imag;
                     t = t.Iteralizacja(temp);
-                    //t = t.Iteralizacja(temp);
-                    //t = t.Iteralizacja(temp);
-                   if (Math.Abs(t.real) < 2)
+                    t = t.Iteralizacja(temp);
+                    t = t.Iteralizacja(temp);
+                    t = t.Iteralizacja(temp);
+                    if (t.isOver())
                    {
                         //Console.WriteLine(t.ToString());
                         bitmaps[y].SetPixel(i * 3, 0, Color.Black);
