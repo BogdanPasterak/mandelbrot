@@ -8,13 +8,16 @@ namespace Mandelbrot
     public class MyPanel : Panel
     {
         List<Bitmap> bitmaps;
-        ComplexDec start = new ComplexDec(-2.25m, 1.25m);
-        ComplexDec stop = new ComplexDec(.75m, -1.25m);
+        Color[] colors;
+        int bitsPerColor = 2;
+        ComplexDec start = new ComplexDec(-2.15m, 1.25m);
+        ComplexDec stop = new ComplexDec(.75m, -1.35m);
         ComplexDec temp = new ComplexDec(0m, 1m);
 
         //Bitmap bitmap;
         public MyPanel(Size size) : base()
         {
+            initColors();
             int wDiv = size.Width % 3;
             int hDiv = size.Height % 3;
             size.Width -= 12 + wDiv;
@@ -40,17 +43,8 @@ namespace Mandelbrot
                     temp.real = start.real + (3m / (size.Width / 3)) * i;
                     temp.imag = start.imag - (2.5m / (size.Height / 3)) * y;
                     t = new ComplexDec(temp);
-                    Color color = Color.Black;
                     int it = t.level(temp);
-                    if (it == 1) color = Color.Aqua;
-                    if (it == 2) color = Color.Blue;
-                    if (it == 3) color = Color.Cyan;
-                    if (it == 4) color = Color.Fuchsia;
-                    if (it == 5) color = Color.Salmon;
-                    if (it == 6) color = Color.Tan;
-                    if (it == 7) color = Color.Yellow;
-                    if (it > 7) color = Color.Orchid;
-                    if (it > 63) color = Color.Red;
+                    Color color = colors[limitColors(it)];
 
                     {
                         //Console.WriteLine(t.ToString());
@@ -80,6 +74,49 @@ namespace Mandelbrot
             */
         }
 
+        private int limitColors(int it)
+        {
+            while (it >= colors.Length)
+            {
+                it = it - colors.Length + (int)Math.Pow(2, bitsPerColor);
+            }
+            return it;
+        }
+
+        private void initColors()
+        {
+            int pow = (int)Math.Pow(2, bitsPerColor);
+            colors = new Color[pow * 7];
+            int[,] paterns = { { 1, 0, 0 }, { 3, 1, 0 }, { 2, 3, 0 }, { 0, 3, 1 }, { 0, 2, 3 }, { 1, 0, 3 }, { 3, 0, 2 } };
+            int[] rgb = { 0, 0, 0 };
+            int pointer = 3, direction = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (paterns[i, j] == 0) rgb[j] = 0;
+                    else if (paterns[i, j] == 3) rgb[j] = 255;
+                    else { pointer = j; direction = paterns[i, j]; }
+                }
+
+
+                for (int j = 0; j < pow; j++)
+                {
+                    if (direction == 1)
+                        rgb[pointer] = j << (8 - bitsPerColor);
+                    else
+                    {
+                        if (j == 0)
+                            rgb[pointer] = 255;
+                        else
+                            rgb[pointer] = (pow - j) << (8 - bitsPerColor);
+                    }
+
+                    colors[i * pow + j] = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+                    Console.WriteLine(colors[i * pow + j]);
+                }
+            }
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {

@@ -13,8 +13,8 @@
 x64/
 [Bb]in/
 [Oo]bj/
-Mandelbrot/bin/
-Mandelbrot/obj/
+*/bin/
+*/obj/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
