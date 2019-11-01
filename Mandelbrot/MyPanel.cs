@@ -9,7 +9,7 @@ namespace Mandelbrot
     {
         List<Bitmap> bitmaps;
         Color[] colors;
-        int bitsPerColor = 2;
+        int bitsPerColor = 4;
         ComplexDec start = new ComplexDec(-2.15m, 1.25m);
         ComplexDec stop = new ComplexDec(.75m, -1.35m);
         ComplexDec temp = new ComplexDec(0m, 1m);

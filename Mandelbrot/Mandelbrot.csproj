@@ -77,6 +77,8 @@
     <Compile Include="PrimToBinary.cs" />
     <Compile Include="MyForm.cs" />
     <Compile Include="MyPanel.cs" />
+    <Compile Include="MyPanelPixels.cs" />
+    <Compile Include="ColorsTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
