@@ -43,7 +43,7 @@ namespace Mandelbrot
                     temp.real = start.real + (3m / (size.Width / 3)) * i;
                     temp.imag = start.imag - (2.5m / (size.Height / 3)) * y;
                     t = new ComplexDec(temp);
-                    int it = t.level(temp);
+                    int? it = t.level(temp);
                     Color color = ColorsTable.GetColor(it);
 
                     {

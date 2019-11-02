@@ -8,10 +8,11 @@ namespace Mandelbrot
         private ComplexDec center;
         private decimal scale;
         private Bitmap bitmap;
+        private int line;
 
         public MyPanelPixels(Size size) : base()
         {
-            center = new ComplexDec(-0.75m, 0);
+            center = new ComplexDec(-0.75m, 0m);
             scale = 1m / (decimal)Math.Pow(2, 8);
             Console.WriteLine(scale);
             size.Width -= 10;
@@ -19,23 +20,28 @@ namespace Mandelbrot
             Size = size;
             Location = new Point(5, 5);
             bitmap = new Bitmap(size.Width, size.Height);
+            line = 400;
+            Click += (sender, e) => { Console.WriteLine("Klikniete"); };
+            drawLine();
+        }
 
+        public void drawLine()
+        {
             ComplexDec start = new ComplexDec(center.real - (bitmap.Width / 2) * scale, center.imag + (bitmap.Height / 2) * scale);
             ComplexDec complex = new ComplexDec(center);
             ComplexDec z;
-            for (int x = 0; x < bitmap.Width; x++)
+            for (int y = line; y < line + 50; y++)
             {
-                complex.real = start.real + x * scale;
-                for (int y = 0; y < bitmap.Height; y++)
+                complex.imag = start.imag - y * scale;
+                for (int x = 0; x < bitmap.Width; x++)
                 {
-                    complex.imag = start.imag - y * scale;
+                    complex.real = start.real + x * scale;
                     z = new ComplexDec(complex);
                     bitmap.SetPixel(x, y, ColorsTable.GetColor(z.level(complex)));
-
-
-                    if ( complex.real == 0 || complex.imag == 0 ) bitmap.SetPixel(x, y, Color.Black);
+                    //if ( complex.real == 0 || complex.imag == 0 ) bitmap.SetPixel(x, y, Color.Black);
                 }
             }
+            
         }
 
         protected override void OnPaint(PaintEventArgs e)

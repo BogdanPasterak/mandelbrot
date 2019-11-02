@@ -16,6 +16,7 @@ namespace Mandelbrot
             MyForm myForm = new MyForm();
 
             Application.Run(myForm);
+            
             //PrimToBinary ptb = new PrimToBinary();
 
             //Process process = Process.GetCurrentProcess();

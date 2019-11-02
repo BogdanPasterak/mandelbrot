@@ -49,8 +49,11 @@ namespace Mandelbrot
             }
         }
 
-        public static Color GetColor(int number)
+        public static Color GetColor(int? number)
         {
+            if (number == null)
+                return Color.Black;
+
             if (BIT_PER_COLOR == 0)
                 Initialize();
 
@@ -59,7 +62,7 @@ namespace Mandelbrot
                 number = number - COLORS.Length + RESOLUTION;
             }
 
-            return COLORS[number];
+            return COLORS[number ?? 0];
         }
     }
 }

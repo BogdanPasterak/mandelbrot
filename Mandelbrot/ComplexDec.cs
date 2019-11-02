@@ -22,12 +22,12 @@ namespace Mandelbrot
             return new ComplexDec(real * real - imag * imag + c.real, 2 * real * imag + c.imag);
         }
 
-        public int level(ComplexDec c)
+        public int? level(ComplexDec c)
         {
             int level = 0;
             decimal rSquare, iSquare;
 
-            while (level < 57)
+            while (level < 110)
             {
                 rSquare = real * real;
                 iSquare = imag * imag;
@@ -39,7 +39,7 @@ namespace Mandelbrot
             }
 
 
-            return level;
+            return null;
         }
 
         public override string ToString()
