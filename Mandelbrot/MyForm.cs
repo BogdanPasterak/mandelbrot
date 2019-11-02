@@ -9,14 +9,14 @@ namespace Mandelbrot
 {
     public class MyForm : Form
     {
-        MyPanel panel;
-        Size mySize = new Size(920, 790);
+        MyPanelPixels panel;
+        Size mySize = new Size(1220, 990);
 
         public MyForm()
         {
             this.Text = "Mandelbrot";
             this.Size = mySize;
-            panel = new MyPanel(this.ClientSize);
+            panel = new MyPanelPixels(this.ClientSize);
 
 
             this.Controls.Add(panel);

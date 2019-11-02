@@ -114,3 +114,8 @@
 /home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/System.Security.Principal.Windows.xml
 /home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/System.Security.AccessControl.xml
 /home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/Microsoft.Win32.Registry.xml
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/Mandelbrot.exe.config
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/EntityFramework.dll
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/EntityFramework.SqlServer.dll
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/EntityFramework.xml
+/home/bogdan/Projects/Mandelbrot/Mandelbrot/bin/Debug/EntityFramework.SqlServer.xml

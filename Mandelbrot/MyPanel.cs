@@ -44,7 +44,7 @@ namespace Mandelbrot
                     temp.imag = start.imag - (2.5m / (size.Height / 3)) * y;
                     t = new ComplexDec(temp);
                     int it = t.level(temp);
-                    Color color = colors[limitColors(it)];
+                    Color color = ColorsTable.GetColor(it);
 
                     {
                         //Console.WriteLine(t.ToString());
@@ -113,7 +113,7 @@ namespace Mandelbrot
                     }
 
                     colors[i * pow + j] = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
-                    Console.WriteLine(colors[i * pow + j]);
+                    //Console.WriteLine(colors[i * pow + j]);
                 }
             }
         }

@@ -22,7 +22,6 @@ namespace Mandelbrot
             //MainClass.graphics = Graphics.
 
 
-            Console.WriteLine(ColorsTable.GetColor().ToString());
             Console.WriteLine("End");
 
         }

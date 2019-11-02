@@ -27,7 +27,7 @@ namespace Mandelbrot
             int level = 0;
             decimal rSquare, iSquare;
 
-            while (level < 64)
+            while (level < 57)
             {
                 rSquare = real * real;
                 iSquare = imag * imag;
