@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Mandelbrot
 {
     public class MyPanelPixels : Panel
@@ -9,6 +12,7 @@ namespace Mandelbrot
         private decimal scale;
         private Bitmap bitmap;
         private int line;
+        Thread thread;
 
         public MyPanelPixels(Size size) : base()
         {
@@ -20,15 +24,34 @@ namespace Mandelbrot
             Size = size;
             Location = new Point(5, 5);
             bitmap = new Bitmap(size.Width, size.Height);
-            line = 400;
+            line = 0;
             Click += new EventHandler(MyClick);
+            thread = new Thread(new ThreadStart(MyThreadFunction));
+            Task.Delay(3000).ContinueWith(t => thread.Start());
+            //thread.Start();
             //drawLine();
+        }
+
+        private void MyThreadFunction()
+        {
+            try
+            {
+                while (line < bitmap.Height)
+                {
+                    drawLine();
+                    Invalidate();
+                }
+                Console.WriteLine("Thread work");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Thread exeption\n" + ex.StackTrace);
+            }
         }
 
         void MyClick(object sender, EventArgs e)
         {
-            drawLine();
-            Invalidate();
+            thread.Abort();
             Console.WriteLine("BBB");
         }
 
@@ -37,7 +60,9 @@ namespace Mandelbrot
             ComplexDec start = new ComplexDec(center.real - (bitmap.Width / 2) * scale, center.imag + (bitmap.Height / 2) * scale);
             ComplexDec complex = new ComplexDec(center);
             ComplexDec z;
-            for (int y = line; y < line + 50; y++)
+            int y = line++;
+
+            if ( y < bitmap.Height)
             {
                 complex.imag = start.imag - y * scale;
                 for (int x = 0; x < bitmap.Width; x++)

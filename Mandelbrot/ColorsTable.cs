@@ -12,7 +12,7 @@ namespace Mandelbrot
         private static void Initialize(int? bitsPerColor = null)
         {
             // default resolution 4 bits
-            BIT_PER_COLOR = bitsPerColor ?? 3;
+            BIT_PER_COLOR = bitsPerColor ?? 4;
             RESOLUTION = (int)Math.Pow(2, BIT_PER_COLOR);
             COLORS = new Color[RESOLUTION * 7];
 
