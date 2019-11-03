@@ -19,19 +19,6 @@ namespace Mandelbrot
             panel = new MyPanelPixels(this.ClientSize);
 
             this.Controls.Add(panel);
-            this.Click += new EventHandler(panel_Click);
-
-        }
-
-        private void panel_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine("Cliknolem");
-        }
-
-        public void next()
-        {
-            panel.drawLine();
-            panel.Invalidate();
         }
 
     }

@@ -21,8 +21,15 @@ namespace Mandelbrot
             Location = new Point(5, 5);
             bitmap = new Bitmap(size.Width, size.Height);
             line = 400;
-            Click += (sender, e) => { Console.WriteLine("Klikniete"); };
+            Click += new EventHandler(MyClick);
+            //drawLine();
+        }
+
+        void MyClick(object sender, EventArgs e)
+        {
             drawLine();
+            Invalidate();
+            Console.WriteLine("BBB");
         }
 
         public void drawLine()
