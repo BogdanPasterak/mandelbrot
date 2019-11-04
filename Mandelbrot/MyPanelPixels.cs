@@ -40,7 +40,15 @@ namespace Mandelbrot
             {
                 if (File.Exists("mandelbrot.bmp"))
                 {
-                    bitmap = new Bitmap("mandelbrot.bmp");
+                    Bitmap source = new Bitmap("mandelbrot.bmp");
+                    using (Graphics gr = Graphics.FromImage(bitmap))
+                    {
+                        Point point = new Point((source.Width - bitmap.Width) / 2, (source.Height - bitmap.Height) / 2);
+                        Rectangle from = new Rectangle(point, bitmap.Size);
+                        Rectangle to = new Rectangle(new Point(0, 0), bitmap.Size);
+                        gr.DrawImage(source, to, from, GraphicsUnit.Pixel);
+                    }
+                    //bitmap = new Bitmap(new Bitmap("mandelbrot.bmp"), Size.Width, Size.Height);
                     Invalidate();
                     Console.WriteLine("Bitmap loaded");
                 }
