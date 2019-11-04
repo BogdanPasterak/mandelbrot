@@ -15,8 +15,10 @@ namespace Mandelbrot
         public MyForm()
         {
             this.Text = "Mandelbrot";
-            this.Size = mySize;
+            //this.Size = mySize;
+            WindowState = FormWindowState.Maximized;
             panel = new MyPanelPixels(this.ClientSize);
+            panel = new MyPanelPixels(Screen.FromControl(this).WorkingArea.Size);
 
             this.Controls.Add(panel);
         }

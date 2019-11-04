@@ -16,8 +16,9 @@ namespace Mandelbrot
             MyForm myForm = new MyForm();
 
             Application.Run(myForm);
-            
+
             //PrimToBinary ptb = new PrimToBinary();
+            //ThreeToBinary ptb = new ThreeToBinary();
 
             //Process process = Process.GetCurrentProcess();
             //MainClass.graphics = Graphics.

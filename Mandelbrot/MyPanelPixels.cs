@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +29,7 @@ namespace Mandelbrot
             line = 0;
             Click += new EventHandler(MyClick);
             thread = new Thread(new ThreadStart(MyThreadFunction));
-            Task.Delay(3000).ContinueWith(t => thread.Start());
+            Task.Delay(200).ContinueWith(t => thread.Start());
             //thread.Start();
             //drawLine();
         }
@@ -36,12 +38,24 @@ namespace Mandelbrot
         {
             try
             {
-                while (line < bitmap.Height)
+                if (File.Exists("mandelbrot.bmp"))
                 {
-                    drawLine();
+                    bitmap = new Bitmap("mandelbrot.bmp");
                     Invalidate();
+                    Console.WriteLine("Bitmap loaded");
                 }
-                Console.WriteLine("Thread work");
+                else
+                {
+                    while (line < bitmap.Height)
+                    {
+                        drawLine();
+                        Invalidate();
+                    }
+
+                    Console.WriteLine("Thread finish");
+                    //bitmap.Save("mandelbrot.bmp", ImageFormat.Bmp);
+                    //Console.WriteLine("Bitmap saved");
+                }
             }
             catch (Exception ex)
             {

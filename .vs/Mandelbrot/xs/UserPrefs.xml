@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{3B7FBFF0-D581-4ACC-B820-B1D13728FE56}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Mandelbrot/MyPanelPixels.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mandelbrot/MyForm.cs">
     <Files>
-      <File FileName="Mandelbrot/Program.cs" Line="18" Column="37" />
-      <File FileName="Mandelbrot/MyForm.cs" Line="24" Column="5" />
-      <File FileName="Mandelbrot/MyPanelPixels.cs" Line="47" Column="14" />
-      <File FileName="Mandelbrot/ColorsTable.cs" Line="15" Column="46" />
+      <File FileName="Mandelbrot/Program.cs" Line="21" Column="15" />
+      <File FileName="Mandelbrot/MyForm.cs" Line="21" Column="80" />
+      <File FileName="Mandelbrot/MyPanelPixels.cs" Line="41" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,7 +13,7 @@
             <Node name="Mandelbrot" expanded="True">
               <Node name="References" expanded="True" />
               <Node name="Properties" expanded="True" />
-              <Node name="MyPanelPixels.cs" selected="True" />
+              <Node name="MyForm.cs" selected="True" />
             </Node>
           </Node>
         </State>
