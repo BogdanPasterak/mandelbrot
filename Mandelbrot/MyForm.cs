@@ -10,7 +10,7 @@ namespace Mandelbrot
     public class MyForm : Form
     {
         MyPanelPixels panel;
-        Size mySize = new Size(1020, 740);
+        Size mySize = new Size(920, 740);
 
         public MyForm()
         {

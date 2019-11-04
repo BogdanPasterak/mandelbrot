@@ -14,6 +14,7 @@ namespace Mandelbrot
         private decimal scale;
         private Bitmap bitmap;
         private int line;
+        private Point mouseClick;
         Thread thread;
 
         public MyPanelPixels(Size size) : base()
@@ -27,7 +28,7 @@ namespace Mandelbrot
             Location = new Point(5, 5);
             bitmap = new Bitmap(size.Width, size.Height);
             line = 0;
-            Click += new EventHandler(MyClick);
+            //Click += new EventHandler(MyClick);
             thread = new Thread(new ThreadStart(MyThreadFunction));
             Task.Delay(200).ContinueWith(t => thread.Start());
             //thread.Start();
@@ -71,10 +72,21 @@ namespace Mandelbrot
             }
         }
 
-        void MyClick(object sender, EventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
+            base.OnMouseDown(e);
+            mouseClick = new Point(e.X, e.Y);
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
             thread.Abort();
-            Console.WriteLine("BBB");
+            if (Math.Abs(e.X - mouseClick.X) + Math.Abs(e.Y - mouseClick.Y) < 5)
+            {
+                Console.WriteLine("click!!! " + e.Location);
+            }
+
         }
 
         public void drawLine()
