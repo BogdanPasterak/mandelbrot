@@ -84,9 +84,20 @@ namespace Mandelbrot
             thread.Abort();
             if (Math.Abs(e.X - mouseClick.X) + Math.Abs(e.Y - mouseClick.Y) < 5)
             {
-                Console.WriteLine("click!!! " + e.Location);
+                mouseClick.X = Width / 2 - e.Location.X;
+                mouseClick.Y = Height / 2 - e.Location.Y;
+                thread = new Thread(new ThreadStart(MyThreadIncrease));
+                //Task.Delay(200).ContinueWith(t => thread.Start());
+                thread.Start();
+
             }
 
+        }
+
+        private void MyThreadIncrease()
+        {
+            ComplexDec complex = new ComplexDec(center.real - scale * mouseClick.X, center.imag + scale * mouseClick.Y);
+            Console.WriteLine("Thread increase!!! " + complex);
         }
 
         public void drawLine()
