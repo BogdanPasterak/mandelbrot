@@ -84,8 +84,7 @@ namespace Mandelbrot
             thread.Abort();
             if (Math.Abs(e.X - mouseClick.X) + Math.Abs(e.Y - mouseClick.Y) < 5)
             {
-                mouseClick.X = Width / 2 - e.Location.X;
-                mouseClick.Y = Height / 2 - e.Location.Y;
+                mouseClick = e.Location;
                 thread = new Thread(new ThreadStart(MyThreadIncrease));
                 //Task.Delay(200).ContinueWith(t => thread.Start());
                 thread.Start();
@@ -96,8 +95,42 @@ namespace Mandelbrot
 
         private void MyThreadIncrease()
         {
-            ComplexDec complex = new ComplexDec(center.real - scale * mouseClick.X, center.imag + scale * mouseClick.Y);
+
+            ComplexDec complex = new ComplexDec(center.real - scale * (Width / 2 - mouseClick.X),
+                                                center.imag + scale * (Height / 2 - mouseClick.Y));
+            //Point startOrigin = new Point(mouseClick.X - Width / 6, mouseClick.Y - Height / 6);
+            Bitmap copy = new Bitmap(Width / 3, Height / 3);
+            using (Graphics gr = Graphics.FromImage(copy))
+            {
+                Point point = new Point(mouseClick.X - Width / 6, mouseClick.Y - Height / 6);
+                Rectangle from = new Rectangle(point, copy.Size);
+                Rectangle to = new Rectangle(new Point(0, 0), copy.Size);
+                gr.DrawImage(bitmap, to, from, GraphicsUnit.Pixel);
+            }
+            Color color;
+            for (int y = 0; y < copy.Height; y++)
+            {
+                for (int x = 0; x < copy.Width; x++)
+                {
+                    color = copy.GetPixel(x, y);
+                    bitmap.SetPixel(x * 3, y * 3, color);
+                    bitmap.SetPixel(x * 3 + 1, y * 3, color);
+                    bitmap.SetPixel(x * 3 + 2, y * 3, color);
+                    bitmap.SetPixel(x * 3, y * 3 + 1, color);
+                    bitmap.SetPixel(x * 3 + 1, y * 3 + 1, color);
+                    bitmap.SetPixel(x * 3 + 2, y * 3 + 1, color);
+                    bitmap.SetPixel(x * 3, y * 3 + 2, color);
+                    bitmap.SetPixel(x * 3 + 1, y * 3 + 2, color);
+                    bitmap.SetPixel(x * 3 + 2, y * 3 + 2, color);
+                }
+            }
+
+            Invalidate();
+
             Console.WriteLine("Thread increase!!! " + complex);
+            Console.WriteLine("click  " + mouseClick);
+            Console.WriteLine((mouseClick.X - Width / 6).ToString() + "  " + (mouseClick.Y - Height / 6).ToString());
+
         }
 
         public void drawLine()
