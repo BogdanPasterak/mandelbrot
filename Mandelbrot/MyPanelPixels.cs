@@ -22,10 +22,10 @@ namespace Mandelbrot
             center = new ComplexDec(-0.75m, 0m);
             scale = 1m / (decimal)Math.Pow(2, 8);
             Console.WriteLine(scale);
-            size.Width -= 10;
-            size.Height -= 10;
+            size.Width = size.Width - 12 - (size.Width % 3);
+            size.Height = size.Height - 12 - (size.Height % 3);
             Size = size;
-            Location = new Point(5, 5);
+            Location = new Point(6, 6);
             bitmap = new Bitmap(size.Width, size.Height);
             line = 0;
             //Click += new EventHandler(MyClick);
