@@ -95,7 +95,7 @@ namespace Mandelbrot
 
         private void MyThreadIncrease()
         {
-
+            // increase 3x (9)
             ComplexDec complex = new ComplexDec(center.real - scale * (Width / 2 - mouseClick.X),
                                                 center.imag + scale * (Height / 2 - mouseClick.Y));
             //Point startOrigin = new Point(mouseClick.X - Width / 6, mouseClick.Y - Height / 6);
@@ -124,8 +124,35 @@ namespace Mandelbrot
                     bitmap.SetPixel(x * 3 + 2, y * 3 + 2, color);
                 }
             }
-
             Invalidate();
+            // 2 step details (3,3,3)
+            center = complex;
+            scale /= 3;
+            ComplexDec start = new ComplexDec(center.real - (bitmap.Width / 2) * scale, center.imag + (bitmap.Height / 2) * scale);
+            ComplexDec z;
+            for (int y = 0; y < Height; y += 3)
+            {
+                complex.imag = start.imag - y * scale;
+                for (int x = 0; x < Width; x += 3)
+                {
+                    complex.real = start.real + x * scale;
+                    z = new ComplexDec(complex);
+                    color = ColorsTable.GetColor(z.level(complex));
+                    bitmap.SetPixel(x, y, color);
+                    bitmap.SetPixel(x + 1, y, color);
+                    bitmap.SetPixel(x, y + 1, color);
+                }
+                complex.imag = start.imag - (y + 2) * scale;
+                for (int x = 0; x < Width; x += 3)
+                {
+                    complex.real = start.real + (x + 2) * scale;
+                    z = new ComplexDec(complex);
+                    color = ColorsTable.GetColor(z.level(complex));
+                    bitmap.SetPixel(x + 2, y + 2, color);
+                    bitmap.SetPixel(x + 1, y + 2, color);
+                    bitmap.SetPixel(x + 2, y + 1, color);
+                }
+            }
 
             Console.WriteLine("Thread increase!!! " + complex);
             Console.WriteLine("click  " + mouseClick);
