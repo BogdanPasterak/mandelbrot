@@ -12,14 +12,14 @@ namespace Mandelbrot
     public class MyPanelPixels : Panel
     {
         private ComplexDec center;
-        private ComplexDec pointZero;
+        private ComplexDec pointZero, curent, z;
         private decimal scale;
         private Bitmap bitmap;
         private TextBox textBox;
-        private int line;
+        //private int line;
         private Point mouseClick;
-        Thread thread;
-        private Thread t1, t2;
+        //Thread thread;
+        //private Thread t1, t2;
         private BackgroundWorker backgroundWorker;
 
         public MyPanelPixels(Size size) : base()
@@ -34,6 +34,8 @@ namespace Mandelbrot
             Location = new Point(6, 6);
             // complex value in point (0, 0), center(-0.75m, 0m)
             pointZero = new ComplexDec(-0.75m - scale * (size.Width / 2), scale * (size.Height / 2));
+            curent = new ComplexDec(0, 0);
+            z = new ComplexDec(0, 0);
             // canvas to paint
             bitmap = new Bitmap(size.Width, size.Height);
             // control to display
@@ -42,7 +44,7 @@ namespace Mandelbrot
             textBox.Text = "Start";
             this.Controls.Add(textBox);
             // counter to lines
-            line = 0;
+            //line = 0;
             //Click += new EventHandler(MyClick);
             // old start
             //thread = new Thread(new ThreadStart(MyThreadFunction));
@@ -64,8 +66,9 @@ namespace Mandelbrot
         void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
+            Rectangle rect = new Rectangle(0, 0, Width, 1);
 
-            for (int i = 1; i <= 10; i++)
+            for (int lineView = 0; lineView < Height; lineView++)
             {
                 if (worker.CancellationPending == true)
                 {
@@ -74,16 +77,44 @@ namespace Mandelbrot
                 }
                 else
                 {
-                    // Perform a time consuming operation and report progress.
-                    System.Threading.Thread.Sleep(500);
-                    worker.ReportProgress(i * 10);
+                    if(lineView == 0)
+                    {
+                        Thread.Sleep(200);
+                    }
+                    // calculate line
+                    calculateLine(lineView);
+                    rect.Y = lineView;
+                    Invalidate(rect);
+                    //Thread.Sleep(10);
+                    worker.ReportProgress(lineView);
+                }
+            }
+        }
+
+        private void calculateLine(int line)
+        {
+            // ComplexDec start = new ComplexDec(center.real - (bitmap.Width / 2) * scale, center.imag + (bitmap.Height / 2) * scale);
+            //ComplexDec complex = new ComplexDec(center);
+            //ComplexDec z;
+            int y = line; // line++;
+
+            if (y < bitmap.Height)
+            {
+                curent.imag = pointZero.imag - y * scale;
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    curent.real = pointZero.real + x * scale;
+                    z.imag = curent.imag;
+                    z.real = curent.real;
+                    bitmap.SetPixel(x, y, ColorsTable.GetColor(z.level(curent)));
+                    //if ( complex.real == 0 || complex.imag == 0 ) bitmap.SetPixel(x, y, Color.Black);
                 }
             }
         }
 
         void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            textBox.Text = (e.ProgressPercentage.ToString() + "%");
+            textBox.Text = e.ProgressPercentage.ToString();
         }
 
         void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -102,7 +133,7 @@ namespace Mandelbrot
             }
         }
 
-
+        /*
         private void Thread1()
         {
             Console.WriteLine("Thread 1, line " + line);
@@ -162,7 +193,7 @@ namespace Mandelbrot
                 Console.WriteLine("Thread exeption\n" + ex.StackTrace);
             }
         }
-
+        */
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -172,18 +203,18 @@ namespace Mandelbrot
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            thread.Abort();
+            //thread.Abort();
             if (Math.Abs(e.X - mouseClick.X) + Math.Abs(e.Y - mouseClick.Y) < 5)
             {
                 mouseClick = e.Location;
-                thread = new Thread(new ThreadStart(MyThreadIncrease));
+                //thread = new Thread(new ThreadStart(MyThreadIncrease));
                 //Task.Delay(200).ContinueWith(t => thread.Start());
-                thread.Start();
-
+                //thread.Start();
+                backgroundWorker.CancelAsync();
             }
 
         }
-
+        /*
         private void MyThreadIncrease()
         {
             // increase 3x (9)
@@ -252,13 +283,13 @@ namespace Mandelbrot
             Console.WriteLine((mouseClick.X - Width / 6).ToString() + "  " + (mouseClick.Y - Height / 6).ToString());
 
         }
-
+        */
         public void drawLine()
         {
             ComplexDec start = new ComplexDec(center.real - (bitmap.Width / 2) * scale, center.imag + (bitmap.Height / 2) * scale);
             ComplexDec complex = new ComplexDec(center);
             ComplexDec z;
-            int y = line++;
+            int y = 0; // line++;
 
             if ( y < bitmap.Height)
             {
