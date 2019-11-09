@@ -5,41 +5,132 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Mandelbrot
 {
     public class MyPanelPixels : Panel
     {
         private ComplexDec center;
+        private ComplexDec pointZero;
         private decimal scale;
         private Bitmap bitmap;
+        private TextBox textBox;
         private int line;
         private Point mouseClick;
         Thread thread;
+        private Thread t1, t2;
+        private BackgroundWorker backgroundWorker;
 
         public MyPanelPixels(Size size) : base()
         {
             center = new ComplexDec(-0.75m, 0m);
+            // dystance beteen pixels 
             scale = 1m / (decimal)Math.Pow(2, 8);
-            Console.WriteLine(scale);
+            // white frame 6 pixels (set size and location
             size.Width = size.Width - 12 - (size.Width % 3);
             size.Height = size.Height - 12 - (size.Height % 3);
             Size = size;
             Location = new Point(6, 6);
+            // complex value in point (0, 0), center(-0.75m, 0m)
+            pointZero = new ComplexDec(-0.75m - scale * (size.Width / 2), scale * (size.Height / 2));
+            // canvas to paint
             bitmap = new Bitmap(size.Width, size.Height);
+            // control to display
+            textBox = new TextBox();
+            textBox.Width = 30;
+            textBox.Text = "Start";
+            this.Controls.Add(textBox);
+            // counter to lines
             line = 0;
             //Click += new EventHandler(MyClick);
-            thread = new Thread(new ThreadStart(MyThreadFunction));
-            Task.Delay(200).ContinueWith(t => thread.Start());
+            // old start
+            //thread = new Thread(new ThreadStart(MyThreadFunction));
+            //Task.Delay(200).ContinueWith(t => thread.Start());
+            // new thread
+            //t1 = new Thread(new ThreadStart(Thread1));
+            //Task.Delay(200).ContinueWith(t => t1.Start());
             //thread.Start();
             //drawLine();
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            for (int i = 1; i <= 10; i++)
+            {
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    // Perform a time consuming operation and report progress.
+                    System.Threading.Thread.Sleep(500);
+                    worker.ReportProgress(i * 10);
+                }
+            }
+        }
+
+        void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            textBox.Text = (e.ProgressPercentage.ToString() + "%");
+        }
+
+        void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+                textBox.Text = "Canceled!";
+            }
+            else if (e.Error != null)
+            {
+                textBox.Text = "Error: " + e.Error.Message;
+            }
+            else
+            {
+                textBox.Text = "Done!";
+            }
+        }
+
+
+        private void Thread1()
+        {
+            Console.WriteLine("Thread 1, line " + line);
+            textBox.Text = line.ToString();
+            line++; line++; line++;
+            t2 = new Thread(new ThreadStart(Thread2));
+            t2.Start();
+            t1.Abort();
+        }
+
+        private void Thread2()
+        {
+            if (line == 10000)
+            {
+                Console.WriteLine("Thread 2, line " + line);
+                textBox.Text = line.ToString();
+                line++;
+                //t1 = new Thread(new ThreadStart(Thread2));
+                t1.Start();
+            }
+            t2.Abort();
         }
 
         private void MyThreadFunction()
         {
             try
             {
-                if (File.Exists("mandelbrot.bmp"))
+                if (File.Exists("mandelbrot_.bmp"))
                 {
                     Bitmap source = new Bitmap("mandelbrot.bmp");
                     using (Graphics gr = Graphics.FromImage(bitmap))
@@ -58,7 +149,7 @@ namespace Mandelbrot
                     while (line < bitmap.Height)
                     {
                         drawLine();
-                        Invalidate();
+                        Invalidate( new Rectangle(0, line -1, Width, 1));
                     }
 
                     Console.WriteLine("Thread finish");
@@ -132,6 +223,7 @@ namespace Mandelbrot
             ComplexDec z;
             for (int y = 0; y < Height; y += 3)
             {
+                textBox.Text = y.ToString();
                 complex.imag = start.imag - y * scale;
                 for (int x = 0; x < Width; x += 3)
                 {
@@ -152,6 +244,7 @@ namespace Mandelbrot
                     bitmap.SetPixel(x + 1, y + 2, color);
                     bitmap.SetPixel(x + 2, y + 1, color);
                 }
+                Invalidate();
             }
 
             Console.WriteLine("Thread increase!!! " + complex);
@@ -178,7 +271,7 @@ namespace Mandelbrot
                     //if ( complex.real == 0 || complex.imag == 0 ) bitmap.SetPixel(x, y, Color.Black);
                 }
             }
-            
+            //textBox.Text = y.ToString();
         }
 
         protected override void OnPaint(PaintEventArgs e)

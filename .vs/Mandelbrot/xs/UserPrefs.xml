@@ -3,7 +3,7 @@
     <Files>
       <File FileName="Mandelbrot/Program.cs" Line="21" Column="15" />
       <File FileName="Mandelbrot/MyForm.cs" Line="13" Column="33" />
-      <File FileName="Mandelbrot/MyPanelPixels.cs" Line="153" Column="42" />
+      <File FileName="Mandelbrot/MyPanelPixels.cs" Line="101" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
