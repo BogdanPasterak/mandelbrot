@@ -43,6 +43,7 @@ namespace Mandelbrot
             textBox.Width = 30;
             textBox.Text = "Start";
             this.Controls.Add(textBox);
+
             // counter to lines
             //line = 0;
             //Click += new EventHandler(MyClick);
@@ -54,6 +55,7 @@ namespace Mandelbrot
             //Task.Delay(200).ContinueWith(t => t1.Start());
             //thread.Start();
             //drawLine();
+            // background worker draw picture in seperate thread
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.WorkerSupportsCancellation = true;
@@ -66,7 +68,7 @@ namespace Mandelbrot
         void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            Rectangle rect = new Rectangle(0, 0, Width, 1);
+            Rectangle rect = new Rectangle(0, 0, Width, 3);
 
             for (int lineView = 0; lineView < Height; lineView++)
             {
@@ -79,14 +81,16 @@ namespace Mandelbrot
                 {
                     if(lineView == 0)
                     {
-                        Thread.Sleep(200);
+                        Thread.Sleep(300);
                     }
                     // calculate line
                     calculateLine(lineView);
-                    rect.Y = lineView;
-                    Invalidate(rect);
-                    //Thread.Sleep(10);
-                    worker.ReportProgress(lineView);
+                    if (lineView % 3 == 2)
+                    {
+                        rect.Y = lineView - 2;
+                        Invalidate(rect);
+                        worker.ReportProgress(lineView);
+                    }
                 }
             }
         }
