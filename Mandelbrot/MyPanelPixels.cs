@@ -69,8 +69,13 @@ namespace Mandelbrot
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             Rectangle rect = new Rectangle(0, 0, Width, 3);
+            bool endWork = false;
+            int step = 1;
+            int line = 0;
+            Color color;
 
-            for (int lineView = 0; lineView < Height; lineView++)
+            Thread.Sleep(300);
+            while (!endWork)
             {
                 if (worker.CancellationPending == true)
                 {
@@ -79,20 +84,74 @@ namespace Mandelbrot
                 }
                 else
                 {
-                    if(lineView == 0)
+                    if (step == 1)
                     {
-                        Thread.Sleep(300);
+
+                        for (int x = 0; x < Width; x += 3)
+                        {
+                            color = calculatePoint(x, line + 1);
+                            bitmap.SetPixel(x, line, color);
+                            bitmap.SetPixel(x + 1, line, color);
+                            bitmap.SetPixel(x + 2, line, color);
+                            bitmap.SetPixel(x, line + 1, color);
+                            bitmap.SetPixel(x + 1, line + 1, color);
+                            bitmap.SetPixel(x + 2, line + 1, color);
+                            bitmap.SetPixel(x, line + 2, color);
+                            bitmap.SetPixel(x + 1, line + 2, color);
+                            bitmap.SetPixel(x + 2, line + 2, color);
+                        }
+                        rect.Y = line;
+                        Invalidate(rect);
+                        worker.ReportProgress(line);
+                        line += 3;
+                        if (line >= Height)
+                        {
+                            step++;
+                            line = 0;
+                        }
                     }
                     // calculate line
-                    calculateLine(lineView);
-                    if (lineView % 3 == 2)
+                    else if (step == 2)
                     {
-                        rect.Y = lineView - 2;
+
+                        for (int x = 0; x < Width; x += 3)
+                        {
+                            color = calculatePoint(x, line);
+                            bitmap.SetPixel(x, line, color);
+                            bitmap.SetPixel(x + 1, line, color);
+                            bitmap.SetPixel(x, line + 1, color);
+                            color = calculatePoint(x + 2, line + 2);
+                            bitmap.SetPixel(x + 2, line + 2, color);
+                            bitmap.SetPixel(x + 1, line + 2, color);
+                            bitmap.SetPixel(x + 2, line + 1, color);
+                        }
+                        rect.Y = line;
                         Invalidate(rect);
-                        worker.ReportProgress(lineView);
+                        worker.ReportProgress(line);
+                        line += 3;
+                        if (line >= Height)
+                        {
+                            step++;
+                            line = 0;
+                        }
                     }
+                    else if (step == 3)
+                    {
+                        endWork = true;
+                    }
+                    // calculate line
                 }
             }
+
+        }
+
+        private Color calculatePoint(int x, int y)
+        {
+            curent.imag = pointZero.imag - y * scale;
+            curent.real = pointZero.real + x * scale;
+            z.imag = curent.imag;
+            z.real = curent.real;
+            return ColorsTable.GetColor(z.level(curent));
         }
 
         private void calculateLine(int line)
@@ -129,7 +188,8 @@ namespace Mandelbrot
             }
             else if (e.Error != null)
             {
-                textBox.Text = "Error: " + e.Error.Message;
+                textBox.Text = "Error";
+                Console.WriteLine(e.Error.Message);
             }
             else
             {
